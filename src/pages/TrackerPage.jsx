@@ -22,6 +22,17 @@ export const TrackerPage = () => {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
 
+    const handleEndDateChange = (e) => {
+        const newEndDate = e.target.value
+        setEndDate(newEndDate)
+
+        if (!startDate && newEndDate) {
+            const end = new Date(newEndDate)
+            end.setDate(end.getDate() - 30)
+            setStartDate(end.toISOString().split('T')[0])
+        }
+    }
+
     const filteredTotals = useMemo(() => {
         if (!startDate && !endDate) return totals
 
@@ -68,7 +79,7 @@ export const TrackerPage = () => {
                         <input
                             type="date"
                             value={endDate}
-                            onChange={(e) => setEndDate(e.target.value)}
+                            onChange={handleEndDateChange}
                             className="mt-1 rounded-xl border border-muted bg-surface px-3 py-2 text-base"
                         />
                     </label>
