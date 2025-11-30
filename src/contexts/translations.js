@@ -1,0 +1,166 @@
+export const translations = {
+    en: {
+        header: {
+            title: 'Personal Finance Tracker',
+            subtitle: 'Track your personal income and expenses',
+        },
+        sections: {
+            overview: 'Overview',
+            quickEntry: 'Quick Entry',
+            allEntries: 'All Entries',
+        },
+        tracker: {
+            loading: 'Loading data...',
+        },
+        summary: {
+            income: 'Total Income',
+            expense: 'Total Expense',
+            net: 'Difference',
+        },
+        dateFilter: {
+            startDate: 'Start Date',
+            endDate: 'End Date',
+        },
+        form: {
+            entryType: 'Entry Type',
+            typeIncome: 'Income',
+            typeExpense: 'Expense',
+            amount: 'Amount',
+            category: 'Category',
+            date: 'Date',
+            notes: 'Notes (optional)',
+            notesPlaceholder: 'Add context that helps you remember this entry',
+            categoryPlaceholder: 'e.g. Rent, Groceries',
+            submit: 'Save Entry',
+            errors: {
+                amount: 'Add a positive amount',
+                category: 'Category is required',
+                date: 'Select a date',
+            },
+        },
+        table: {
+            empty: 'No entries yet. Add your first income or expense above.',
+            headers: {
+                type: 'Type',
+                category: 'Category',
+                amount: 'Amount',
+                date: 'Date',
+                notes: 'Notes',
+                actions: 'Actions',
+            },
+            delete: 'Delete',
+        },
+        footer: {
+            note: 'Data is stored locally.',
+        },
+        controls: {
+            theme: {
+                light: 'Light mode',
+                dark: 'Dark mode',
+            },
+            language: 'Language',
+            currency: 'Currency',
+        },
+        errors: {
+            dbInit: 'Unable to initialize database. Refresh the page and try again.',
+            save: 'Unable to save entry. Please retry.',
+            delete: 'Unable to delete entry.',
+            categoryLoad: 'Unable to load categories.',
+            categoryCreate: 'Unable to create category. Try a different name.',
+            categoryDelete: 'Unable to remove category.',
+        },
+        categoryPanel: {
+            title: 'Categories',
+            formTitle: 'Create a category',
+            inputLabel: 'Name',
+            placeholder: 'e.g. Transport',
+            typeLabel: 'Entry type',
+            submit: 'Add category',
+            listTitle: 'Saved categories',
+            empty: 'No categories yet. Add one to get started.',
+            remove: 'Remove',
+        },
+    },
+    tr: {
+        header: {
+            title: 'Kişisel Finans Takibi',
+            subtitle: 'Kişisel gelir-giderlerinizi takip edin',
+        },
+        sections: {
+            overview: 'Genel Bakış',
+            quickEntry: 'Hızlı Kayıt',
+            allEntries: 'Tüm Kayıtlar',
+        },
+        tracker: {
+            loading: 'Veriler yükleniyor...',
+        },
+        summary: {
+            income: 'Toplam Gelir',
+            expense: 'Toplam Gider',
+            net: 'Fark',
+        },
+        dateFilter: {
+            startDate: 'Başlangıç Tarihi',
+            endDate: 'Bitiş Tarihi',
+        },
+        form: {
+            entryType: 'Kayıt türü',
+            typeIncome: 'Gelir',
+            typeExpense: 'Gider',
+            amount: 'Tutar',
+            category: 'Kategori',
+            date: 'Tarih',
+            notes: 'Notlar (opsiyonel)',
+            notesPlaceholder: 'Bu kaydı hatırlatacak kısa bir not yazın',
+            categoryPlaceholder: 'örn. Kira, Market',
+            submit: 'Kaydı kaydet',
+            errors: {
+                amount: 'Pozitif bir tutar girin',
+                category: 'Kategori zorunludur',
+                date: 'Bir tarih seçin',
+            },
+        },
+        table: {
+            empty: 'Henüz kayıt yok. İlk gelir veya giderinizi yukarıdan ekleyin.',
+            headers: {
+                type: 'Tür',
+                category: 'Kategori',
+                amount: 'Tutar',
+                date: 'Tarih',
+                notes: 'Notlar',
+                actions: 'İşlemler',
+            },
+            delete: 'Sil',
+        },
+        footer: {
+            note: 'Veriler yerel olarak saklanır',
+        },
+        controls: {
+            theme: {
+                light: 'Aydınlık mod',
+                dark: 'Karanlık mod',
+            },
+            language: 'Dil',
+            currency: 'Para birimi',
+        },
+        errors: {
+            dbInit: 'Veritabanı başlatılamadı. Lütfen sayfayı yenileyin.',
+            save: 'Kayıt kaydedilemedi. Lütfen tekrar deneyin.',
+            delete: 'Kayıt silinemedi.',
+            categoryLoad: 'Kategoriler yüklenemedi.',
+            categoryCreate: 'Kategori oluşturulamadı. Farklı bir isim deneyin.',
+            categoryDelete: 'Kategori silinemedi.',
+        },
+        categoryPanel: {
+            title: 'Kategoriler',
+            formTitle: 'Kategori oluştur',
+            inputLabel: 'Adı',
+            placeholder: 'örn. Ulaşım',
+            typeLabel: 'Kayıt türü',
+            submit: 'Kategori ekle',
+            listTitle: 'Kayıtlı kategoriler',
+            empty: 'Henüz kategori yok. Başlamak için bir tane ekleyin.',
+            remove: 'Sil',
+        },
+    },
+}
