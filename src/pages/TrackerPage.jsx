@@ -1,11 +1,20 @@
 import { useMemo, useState } from 'react'
 import { CategoryManager } from '../components/CategoryManager'
+import { EntryFilters } from '../components/EntryFilters'
 import { EntryForm } from '../components/EntryForm'
 import { EntryTable } from '../components/EntryTable'
 import { SummaryCards } from '../components/SummaryCards'
 import { useAppPreferences } from '../contexts/useAppPreferences.js'
 import { useCategories } from '../hooks/useCategories'
 import { useEntries } from '../hooks/useEntries'
+
+const initialFilters = {
+    notes: '',
+    category: '',
+    type: '',
+    minAmount: '',
+    maxAmount: '',
+}
 
 export const TrackerPage = () => {
     const { entries, totals, loading, error, addEntry, removeEntry, updateEntry } =
@@ -22,6 +31,7 @@ export const TrackerPage = () => {
 
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
+    const [filters, setFilters] = useState(initialFilters)
 
     const handleEndDateChange = (e) => {
         const newEndDate = e.target.value
@@ -57,6 +67,41 @@ export const TrackerPage = () => {
             { income: 0, expense: 0, net: 0 }
         )
     }, [entries, totals, startDate, endDate])
+
+    const filteredEntries = useMemo(() => {
+        return entries.filter((entry) => {
+            // Notes filter (case-insensitive contains)
+            if (filters.notes) {
+                const searchTerm = filters.notes.toLowerCase()
+                const entryNotes = (entry.notes || '').toLowerCase()
+                if (!entryNotes.includes(searchTerm)) return false
+            }
+
+            // Category filter
+            if (filters.category && entry.category !== filters.category) {
+                return false
+            }
+
+            // Type filter (income/expense)
+            if (filters.type && entry.type !== filters.type) {
+                return false
+            }
+
+            // Min amount filter
+            if (filters.minAmount) {
+                const min = Number(filters.minAmount)
+                if (entry.amount < min) return false
+            }
+
+            // Max amount filter
+            if (filters.maxAmount) {
+                const max = Number(filters.maxAmount)
+                if (entry.amount > max) return false
+            }
+
+            return true
+        })
+    }, [entries, filters])
 
     return (
         <div className="space-y-6">
@@ -135,8 +180,13 @@ export const TrackerPage = () => {
                         {error}
                     </div>
                 ) : null}
-                <EntryTable
+                <EntryFilters
+                    filters={filters}
+                    onChange={setFilters}
                     entries={entries}
+                />
+                <EntryTable
+                    entries={filteredEntries}
                     onDelete={removeEntry}
                     onEdit={setEditingEntry}
                 />
