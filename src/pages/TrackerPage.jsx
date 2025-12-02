@@ -8,8 +8,9 @@ import { useCategories } from '../hooks/useCategories'
 import { useEntries } from '../hooks/useEntries'
 
 export const TrackerPage = () => {
-    const { entries, totals, loading, error, addEntry, removeEntry } =
+    const { entries, totals, loading, error, addEntry, removeEntry, updateEntry } =
         useEntries()
+    const [editingEntry, setEditingEntry] = useState(null)
     const {
         categories,
         loading: categoriesLoading,
@@ -90,7 +91,16 @@ export const TrackerPage = () => {
                 <h2 className="text-xl font-semibold">
                     {t('sections.quickEntry')}
                 </h2>
-                <EntryForm onSubmit={addEntry} categories={categories} />
+                <EntryForm
+                    onSubmit={addEntry}
+                    onUpdate={(id, payload) => {
+                        updateEntry(id, payload)
+                        setEditingEntry(null)
+                    }}
+                    onCancelEdit={() => setEditingEntry(null)}
+                    editingEntry={editingEntry}
+                    categories={categories}
+                />
             </section>
 
             <section className="space-y-4">
@@ -125,7 +135,11 @@ export const TrackerPage = () => {
                         {error}
                     </div>
                 ) : null}
-                <EntryTable entries={entries} onDelete={removeEntry} />
+                <EntryTable
+                    entries={entries}
+                    onDelete={removeEntry}
+                    onEdit={setEditingEntry}
+                />
             </section>
         </div>
     )

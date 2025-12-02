@@ -5,7 +5,7 @@ const formatAmount = (formatCurrency, type, amount) => {
     return type === 'expense' ? `- ${formatted}` : `+ ${formatted}`
 }
 
-export const EntryTable = ({ entries, onDelete }) => {
+export const EntryTable = ({ entries, onDelete, onEdit }) => {
     const { formatCurrency, t } = useAppPreferences()
 
     if (!entries.length) {
@@ -74,6 +74,13 @@ export const EntryTable = ({ entries, onDelete }) => {
                                 {entry.notes || '-'}
                             </td>
                             <td className="border-b border-muted px-4 py-3 text-right">
+                                <button
+                                    type="button"
+                                    onClick={() => onEdit(entry)}
+                                    className="mr-3 text-sm font-semibold text-accent underline-offset-4 hover:underline"
+                                >
+                                    {t('table.edit')}
+                                </button>
                                 <button
                                     type="button"
                                     onClick={() => onDelete(entry.id)}

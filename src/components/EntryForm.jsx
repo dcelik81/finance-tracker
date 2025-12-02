@@ -1,4 +1,4 @@
-import { useId, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo, useState } from 'react'
 import { useAppPreferences } from '../contexts/useAppPreferences.js'
 
 const initialState = () => ({
@@ -9,7 +9,13 @@ const initialState = () => ({
     notes: '',
 })
 
-export const EntryForm = ({ onSubmit, categories = [] }) => {
+export const EntryForm = ({
+    onSubmit,
+    onUpdate,
+    onCancelEdit,
+    editingEntry,
+    categories = [],
+}) => {
     const { t } = useAppPreferences()
     const [form, setForm] = useState(() => initialState())
     const [errors, setErrors] = useState({})
@@ -18,6 +24,23 @@ export const EntryForm = ({ onSubmit, categories = [] }) => {
     const dateId = useId()
     const notesId = useId()
     const datalistId = useId()
+
+    const isEditing = Boolean(editingEntry)
+
+    useEffect(() => {
+        if (editingEntry) {
+            setForm({
+                type: editingEntry.type,
+                amount: String(editingEntry.amount),
+                category: editingEntry.category,
+                date: editingEntry.date,
+                notes: editingEntry.notes || '',
+            })
+            setErrors({})
+        } else {
+            setForm(initialState())
+        }
+    }, [editingEntry])
 
     const categoryOptions = useMemo(
         () => categories.filter((category) => category.type === form.type),
@@ -50,8 +73,18 @@ export const EntryForm = ({ onSubmit, categories = [] }) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         if (!validate()) return
-        onSubmit(form)
+        if (isEditing) {
+            onUpdate(editingEntry.id, form)
+        } else {
+            onSubmit(form)
+        }
         setForm(initialState())
+    }
+
+    const handleCancel = () => {
+        setForm(initialState())
+        setErrors({})
+        onCancelEdit?.()
     }
 
     return (
@@ -196,12 +229,21 @@ export const EntryForm = ({ onSubmit, categories = [] }) => {
                 />
             </div>
 
-            <div className="pt-2">
+            <div className="flex gap-3 pt-2">
+                {isEditing && (
+                    <button
+                        type="button"
+                        onClick={handleCancel}
+                        className="flex-1 rounded-xl border border-muted bg-app px-4 py-3 text-base font-semibold transition hover:bg-surface"
+                    >
+                        {t('form.cancel')}
+                    </button>
+                )}
                 <button
                     type="submit"
-                    className="w-full rounded-xl bg-accent px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:opacity-90"
+                    className="flex-1 rounded-xl bg-accent px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:opacity-90"
                 >
-                    {t('form.submit')}
+                    {isEditing ? t('form.update') : t('form.submit')}
                 </button>
             </div>
         </form>

@@ -91,6 +91,34 @@ export const useEntries = () => {
         [db, refreshEntries, t]
     )
 
+    const updateEntry = useCallback(
+        (id, payload) => {
+            if (!db) return
+            try {
+                const stmt = db.prepare(`
+                    UPDATE entries 
+                    SET type = ?, category = ?, amount = ?, date = ?, notes = ?
+                    WHERE id = ?
+                `)
+                stmt.run([
+                    payload.type,
+                    payload.category.trim(),
+                    toNumber(payload.amount),
+                    payload.date,
+                    payload.notes?.trim() || null,
+                    id,
+                ])
+                stmt.free()
+                persistDatabase(db)
+                refreshEntries()
+            } catch (err) {
+                console.error(err)
+                setError(t('errors.update'))
+            }
+        },
+        [db, refreshEntries, t]
+    )
+
     const totals = useMemo(() => {
         if (!entries.length) return initialTotals
         return entries.reduce(
@@ -114,5 +142,6 @@ export const useEntries = () => {
         error,
         addEntry,
         removeEntry,
+        updateEntry,
     }
 }

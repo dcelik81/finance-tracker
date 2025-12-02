@@ -32,6 +32,8 @@ export const translations = {
             notesPlaceholder: 'Add context that helps you remember this entry',
             categoryPlaceholder: 'e.g. Rent, Groceries',
             submit: 'Save Entry',
+            update: 'Update Entry',
+            cancel: 'Cancel',
             errors: {
                 amount: 'Add a positive amount',
                 category: 'Category is required',
@@ -48,6 +50,7 @@ export const translations = {
                 notes: 'Notes',
                 actions: 'Actions',
             },
+            edit: 'Edit',
             delete: 'Delete',
         },
         footer: {
@@ -65,6 +68,7 @@ export const translations = {
             dbInit: 'Unable to initialize database. Refresh the page and try again.',
             save: 'Unable to save entry. Please retry.',
             delete: 'Unable to delete entry.',
+            update: 'Unable to update entry. Please retry.',
             categoryLoad: 'Unable to load categories.',
             categoryCreate: 'Unable to create category. Try a different name.',
             categoryDelete: 'Unable to remove category.',
@@ -114,6 +118,8 @@ export const translations = {
             notesPlaceholder: 'Bu kaydı hatırlatacak kısa bir not yazın',
             categoryPlaceholder: 'örn. Kira, Market',
             submit: 'Kaydı kaydet',
+            update: 'Kaydı güncelle',
+            cancel: 'İptal',
             errors: {
                 amount: 'Pozitif bir tutar girin',
                 category: 'Kategori zorunludur',
@@ -130,6 +136,7 @@ export const translations = {
                 notes: 'Notlar',
                 actions: 'İşlemler',
             },
+            edit: 'Düzenle',
             delete: 'Sil',
         },
         footer: {
@@ -147,6 +154,7 @@ export const translations = {
             dbInit: 'Veritabanı başlatılamadı. Lütfen sayfayı yenileyin.',
             save: 'Kayıt kaydedilemedi. Lütfen tekrar deneyin.',
             delete: 'Kayıt silinemedi.',
+            update: 'Kayıt güncellenemedi. Lütfen tekrar deneyin.',
             categoryLoad: 'Kategoriler yüklenemedi.',
             categoryCreate: 'Kategori oluşturulamadı. Farklı bir isim deneyin.',
             categoryDelete: 'Kategori silinemedi.',
